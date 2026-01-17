@@ -7,11 +7,16 @@ from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_asyn
 from app.config.settings import settings
 
 # Create async engine
+# Note: prepared_statement_cache_size=0 is required for Supabase connection pooler
+# (Supavisor) which uses transaction mode and doesn't support prepared statements
 engine = create_async_engine(
     settings.database_url,
     pool_pre_ping=True,  # Verify connections before using
     pool_recycle=300,  # Recycle connections every 5 minutes
     echo=settings.debug,  # Log SQL in debug mode
+    connect_args={
+        "prepared_statement_cache_size": 0,
+    },
 )
 
 # Create async session factory
