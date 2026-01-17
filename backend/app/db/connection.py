@@ -15,7 +15,7 @@ engine = create_async_engine(
     pool_recycle=300,  # Recycle connections every 5 minutes
     echo=settings.debug,  # Log SQL in debug mode
     connect_args={
-        "prepared_statement_cache_size": 0,
+        "statement_cache_size": 0,
     },
 )
 
