@@ -98,6 +98,24 @@ LOG_TO_FILE=true
 LOG_FILE_PATH=logs/acodeaday.log
 ```
 
+### CORS Configuration
+
+```bash
+# Comma-separated list of allowed origins for CORS
+# For production, set this to your frontend domain(s)
+CORS_ORIGINS=http://localhost:3000,http://localhost:5173
+```
+
+**Important:** In production, set this to your actual frontend domain(s):
+
+```bash
+# Single domain
+CORS_ORIGINS=https://yourdomain.com
+
+# Multiple domains
+CORS_ORIGINS=https://yourdomain.com,https://www.yourdomain.com
+```
+
 ### AI Chat (LLM)
 
 ```bash
@@ -156,6 +174,12 @@ DEBUG=true
 LOG_LEVEL=INFO
 LOG_TO_FILE=true
 LOG_FILE_PATH=logs/acodeaday.log
+
+# =============================================================================
+# CORS Configuration
+# =============================================================================
+# Comma-separated list of allowed origins (set to your frontend domain in production)
+CORS_ORIGINS=http://localhost:3000,http://localhost:5173,http://localhost:5174
 
 # =============================================================================
 # Frontend (VITE_ prefix required)

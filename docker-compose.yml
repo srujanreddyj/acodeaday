@@ -7,7 +7,12 @@ services:
   judge0-server:
     image: judge0/judge0:1.13.1
     container_name: acodeaday-judge0-server
-    command: ["bash", "-c", "sudo mkdir -p /box && sudo chmod 1777 /box && exec ./scripts/server"]
+    command:
+      [
+        "bash",
+        "-c",
+        "sudo mkdir -p /box && sudo chmod 1777 /box && exec ./scripts/server",
+      ]
     volumes:
       - ./judge0-data:/data
     ports:
@@ -59,7 +64,12 @@ services:
   judge0-workers:
     image: judge0/judge0:1.13.1
     container_name: acodeaday-judge0-workers
-    command: ["bash", "-c", "sudo mkdir -p /box && sudo chmod 1777 /box && exec ./scripts/workers"]
+    command:
+      [
+        "bash",
+        "-c",
+        "sudo mkdir -p /box && sudo chmod 1777 /box && exec ./scripts/workers",
+      ]
     volumes:
       - ./judge0-data:/data
     privileged: true
@@ -113,7 +123,7 @@ services:
     volumes:
       - judge0-postgres-data:/var/lib/postgresql/data
     ports:
-      - "5434:5432"  # Exposed on 5434 (5433 used by aide project)
+      - "5434:5432" # Exposed on 5434 (5433 used by aide project)
     restart: unless-stopped
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U judge0"]
@@ -130,7 +140,7 @@ services:
     volumes:
       - judge0-redis-data:/data
     ports:
-      - "6380:6379"  # Exposed on 6380 to avoid conflicts
+      - "6380:6379" # Exposed on 6380 to avoid conflicts
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
@@ -159,7 +169,7 @@ services:
       - SUPABASE_URL=${SUPABASE_URL}
       - SUPABASE_KEY=${SUPABASE_KEY}
       # Auth
-      - AUTH_USERNAME=${AUTH_USERNAME:-admin}
+      - AUTH_USER_EMAIL=${AUTH_USER_EMAIL:-admin}
       - AUTH_PASSWORD=${AUTH_PASSWORD:-changeme}
       # Judge0 - uses internal Docker network
       - JUDGE0_URL=http://judge0-server:2358
@@ -194,7 +204,7 @@ services:
       - "3000:3000"
     environment:
       # Runtime env vars - injected at container start
-      - VITE_API_URL=${VITE_API_URL:-http://backend:8000}
+      - VITE_API_URL=${VITE_API_URL:-http://localhost:8000}
       - VITE_SUPABASE_URL=${VITE_SUPABASE_URL:-}
       - VITE_SUPABASE_KEY=${VITE_SUPABASE_KEY:-}
     depends_on:
@@ -215,7 +225,7 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: acodeaday_test
     ports:
-      - "54325:5432"  # Different port from Supabase (54321-54324)
+      - "54325:5432" # Different port from Supabase (54321-54324)
     volumes:
       # Use tmpfs for faster tests (in-memory, no disk I/O)
       - type: tmpfs
@@ -242,7 +252,7 @@ services:
     environment:
       - DATABASE_URL=postgresql+asyncpg://postgres:postgres@postgres-test:5432/acodeaday_test
       - JUDGE0_URL=http://judge0-server:2358
-      - AUTH_USERNAME=admin
+      - AUTH_USER_EMAIL=admin
       - AUTH_PASSWORD=changeme
     volumes:
       - ./backend:/app

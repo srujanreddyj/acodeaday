@@ -37,7 +37,7 @@ DATABASE_URL=postgresql+asyncpg://postgres:PASSWORD@HOST:5432/postgres
 SUPABASE_URL=https://YOUR_PROJECT.supabase.co
 SUPABASE_KEY=YOUR_ANON_KEY
 JUDGE0_URL=https://your-judge0-instance.com
-AUTH_USERNAME=admin
+AUTH_USER_EMAIL=admin
 AUTH_PASSWORD=your-secure-password
 ENVIRONMENT=production
 PYTHONUNBUFFERED=1
@@ -61,11 +61,13 @@ After first deployment:
 4. You'll see the app URL
 
 SSH into Railway (if needed):
+
 ```bash
 railway run uv run alembic upgrade head
 ```
 
 Or run migrations locally against production DB:
+
 ```bash
 # Set DATABASE_URL to production
 uv run alembic upgrade head
@@ -79,6 +81,7 @@ railway run uv run python scripts/seed_problems.py seed
 ```
 
 Or locally:
+
 ```bash
 # Set DATABASE_URL to production
 uv run python scripts/seed_problems.py seed
@@ -87,11 +90,13 @@ uv run python scripts/seed_problems.py seed
 ### 8. Get Deployment URL
 
 Railway provides a URL like:
+
 ```
 https://acodeaday-production.up.railway.app
 ```
 
 Test it:
+
 ```bash
 curl https://your-app.up.railway.app/api/problems
 ```
@@ -190,7 +195,7 @@ flyctl secrets set DATABASE_URL="postgresql+asyncpg://..."
 flyctl secrets set SUPABASE_URL="https://..."
 flyctl secrets set SUPABASE_KEY="..."
 flyctl secrets set JUDGE0_URL="https://..."
-flyctl secrets set AUTH_USERNAME="admin"
+flyctl secrets set AUTH_USER_EMAIL="admin"
 flyctl secrets set AUTH_PASSWORD="your-password"
 ```
 
@@ -243,7 +248,7 @@ DATABASE_URL=postgresql+asyncpg://...
 SUPABASE_URL=https://...
 SUPABASE_KEY=...
 JUDGE0_URL=https://...
-AUTH_USERNAME=admin
+AUTH_USER_EMAIL=admin
 AUTH_PASSWORD=your-password
 ENVIRONMENT=production
 ```
@@ -278,7 +283,7 @@ JUDGE0_URL=https://your-judge0-instance.com
 # Optional: JUDGE0_API_KEY=your_key (if using auth)
 
 # Authentication
-AUTH_USERNAME=admin
+AUTH_USER_EMAIL=admin
 AUTH_PASSWORD=your-secure-password
 
 # Environment

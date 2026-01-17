@@ -24,7 +24,12 @@ services:
   judge0-server:
     image: judge0/judge0:1.13.1
     container_name: acodeaday-judge0-server
-    command: ["bash", "-c", "sudo mkdir -p /box && sudo chmod 1777 /box && exec ./scripts/server"]
+    command:
+      [
+        "bash",
+        "-c",
+        "sudo mkdir -p /box && sudo chmod 1777 /box && exec ./scripts/server",
+      ]
     volumes:
       - ./judge0-data:/data
     ports:
@@ -73,7 +78,12 @@ services:
   judge0-workers:
     image: judge0/judge0:1.13.1
     container_name: acodeaday-judge0-workers
-    command: ["bash", "-c", "sudo mkdir -p /box && sudo chmod 1777 /box && exec ./scripts/workers"]
+    command:
+      [
+        "bash",
+        "-c",
+        "sudo mkdir -p /box && sudo chmod 1777 /box && exec ./scripts/workers",
+      ]
     volumes:
       - ./judge0-data:/data
     privileged: true
@@ -168,7 +178,7 @@ services:
       - SUPABASE_URL=${SUPABASE_URL:-}
       - SUPABASE_KEY=${SUPABASE_KEY:-}
       # Auth credentials
-      - AUTH_USERNAME=${AUTH_USERNAME:-admin}
+      - AUTH_USER_EMAIL=${AUTH_USER_EMAIL:-admin}
       - AUTH_PASSWORD=${AUTH_PASSWORD:-changeme}
       # Judge0 - uses internal Docker network
       - JUDGE0_URL=http://judge0-server:2358
