@@ -25,8 +25,8 @@ FROM node:22-alpine
 
 WORKDIR /app
 
-# Install bash for entrypoint script
-RUN apk add --no-cache bash
+# Install bash for entrypoint script and curl for healthchecks
+RUN apk add --no-cache bash curl
 
 # Copy built output from builder
 COPY --from=builder /app/.output ./.output

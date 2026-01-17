@@ -1,3 +1,5 @@
+name: acodeaday
+
 services:
   # ===========================================================================
   # Judge0 CE - Code Execution Engine
@@ -154,9 +156,10 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     environment:
-      # Database - set in .env file
-      - DATABASE_URL=${DATABASE_URL}
-      - SUPABASE_URL=${SUPABASE_URL}
+      # Database - uses host.docker.internal to reach Supabase on host
+      # Override with your production DATABASE_URL if not using local Supabase
+      - DATABASE_URL=${DATABASE_URL:-postgresql+asyncpg://postgres:postgres@host.docker.internal:54322/postgres}
+      - SUPABASE_URL=${SUPABASE_URL:-http://host.docker.internal:54321}
       - SUPABASE_KEY=${SUPABASE_KEY}
       # Auth
       - AUTH_USERNAME=${AUTH_USERNAME:-admin}
@@ -194,7 +197,7 @@ services:
       - "3000:3000"
     environment:
       # Runtime env vars - injected at container start
-      - VITE_API_URL=${VITE_API_URL:-http://backend:8000}
+      - VITE_API_URL=${VITE_API_URL:-http://localhost:8000}
       - VITE_SUPABASE_URL=${VITE_SUPABASE_URL:-}
       - VITE_SUPABASE_KEY=${VITE_SUPABASE_KEY:-}
     depends_on:
