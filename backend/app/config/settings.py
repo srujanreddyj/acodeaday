@@ -23,15 +23,16 @@ class Settings(BaseSettings):
     )
 
     # Default user credentials (created on startup)
-    default_user_email: str = Field(
+    auth_user_email: str = Field(
         "admin@acodeaday.local", description="Default user email"
     )
-    default_user_password: str = Field(
+    auth_password: str = Field(
         "changeme123", description="Default user password (min 6 chars)"
     )
 
     # Judge0
     judge0_url: str = Field("http://localhost:2358", description="Judge0 API URL")
+    judge0_api_key: str | None = Field(None, description="Judge0 API key (for hosted/authenticated instances)")
 
     # App config
     environment: str = Field("development")
@@ -41,6 +42,12 @@ class Settings(BaseSettings):
     log_level: str = Field("INFO")
     log_to_file: bool = Field(True)
     log_file_path: str = Field("logs/acodeaday.log")
+
+    # CORS
+    cors_origins: str = Field(
+        "http://localhost:3000,http://localhost:5173,http://localhost:5174",
+        description="Comma-separated list of allowed CORS origins"
+    )
 
     # LLM Settings
     llm_supported_models: str = Field(

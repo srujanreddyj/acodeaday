@@ -17,16 +17,16 @@ ENV VITE_API_URL=__VITE_API_URL_PLACEHOLDER__
 ENV VITE_SUPABASE_URL=__VITE_SUPABASE_URL_PLACEHOLDER__
 ENV VITE_SUPABASE_KEY=__VITE_SUPABASE_KEY_PLACEHOLDER__
 
-# Build the application
-RUN npm run build
+# Build the application (skip type generation - types should be pre-committed)
+RUN npm run build:docker
 
 # Stage 2: Production
 FROM node:22-alpine
 
 WORKDIR /app
 
-# Install bash for entrypoint script
-RUN apk add --no-cache bash
+# Install bash for entrypoint script and curl for healthchecks
+RUN apk add --no-cache bash curl
 
 # Copy built output from builder
 COPY --from=builder /app/.output ./.output

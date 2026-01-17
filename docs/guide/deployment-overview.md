@@ -1,6 +1,49 @@
 # Deployment Overview
 
-This guide covers deploying acodeaday to production. The application consists of three main components that can be deployed separately.
+This guide covers deploying acodeaday to production. Choose the deployment method that fits your needs.
+
+## Quick Decision Guide
+
+| I want to...                | Use this guide                                      |
+| --------------------------- | --------------------------------------------------- |
+| Run locally for development | [Quick Start](/guide/quick-start)                   |
+| Self-host on my own server  | [Self-Hosting](/guide/self-hosting)                 |
+| Deploy with Coolify/PaaS    | [Deploy to Coolify](/guide/deploy-coolify)          |
+| Use Vercel + Railway + VPS  | [Distributed Deployment](/guide/deploy-distributed) |
+| Deploy just the backend     | [Deploy Backend](/guide/deploy-backend)             |
+| Deploy just the frontend    | [Deploy Frontend](/guide/deploy-frontend)           |
+
+## Security: Change Default Credentials
+
+::: danger IMPORTANT
+Before deploying to production, you **must** change the default credentials. Leaving defaults exposes your application to unauthorized access.
+:::
+
+### Credentials to Change
+
+| Variable          | Default                       | Where to Change |
+| ----------------- | ----------------------------- | --------------- |
+| `AUTH_USER_EMAIL` | `admin@acodeaday.vercel.app`  | `.env` file     |
+| `AUTH_PASSWORD`   | `changeme`                    | `.env` file     |
+
+### How to Generate Secure Passwords
+
+```bash
+# Generate a random 32-character password
+openssl rand -base64 32
+```
+
+### Example Secure Configuration
+
+```bash
+# In your .env file
+AUTH_USER_EMAIL=your_email@example.com
+AUTH_PASSWORD=K8xP2mN9vL4wQ7jR3hF6tY1bC5gA0sD8
+```
+
+::: tip
+Use a password manager to generate and store unique passwords for each service.
+:::
 
 ## Architecture
 
@@ -25,6 +68,7 @@ This guide covers deploying acodeaday to production. The application consists of
 The React frontend builds to static HTML/CSS/JS files.
 
 **Recommended Platforms:**
+
 - **Vercel** (easiest, free tier)
 - **Netlify** (free tier)
 - **Cloudflare Pages** (free tier)
@@ -32,6 +76,7 @@ The React frontend builds to static HTML/CSS/JS files.
 - **GitHub Pages**
 
 **Requirements:**
+
 - Node.js 22+ build environment
 - Environment variables for API URL and Supabase
 
@@ -40,6 +85,7 @@ The React frontend builds to static HTML/CSS/JS files.
 The FastAPI backend is a Python ASGI application.
 
 **Recommended Platforms:**
+
 - **Railway** (easiest, free tier)
 - **Fly.io** (free tier, more control)
 - **Render** (free tier)
@@ -48,6 +94,7 @@ The FastAPI backend is a Python ASGI application.
 - **DigitalOcean App Platform**
 
 **Requirements:**
+
 - Python 3.12+
 - PostgreSQL connection (Supabase)
 - Judge0 API access
@@ -60,11 +107,13 @@ Judge0 requires Docker and is resource-intensive.
 **Options:**
 
 **Self-hosted (Recommended for production):**
+
 - VPS (DigitalOcean, Linode, AWS EC2)
 - Minimum: 2 CPU cores, 4 GB RAM
 - Runs via Docker Compose
 
 **Hosted Service:**
+
 - [RapidAPI Judge0](https://rapidapi.com/judge0-judge0-default/api/judge0-ce)
 - Free tier: 50 requests/day
 - Paid tiers available
@@ -72,11 +121,13 @@ Judge0 requires Docker and is resource-intensive.
 ### 4. Database
 
 **Supabase (Recommended):**
+
 - Managed PostgreSQL
 - Free tier: 500 MB storage
 - Includes auth, real-time features
 
 **Alternatives:**
+
 - AWS RDS PostgreSQL
 - Google Cloud SQL
 - Neon (serverless Postgres)
@@ -94,29 +145,37 @@ Perfect for personal projects and testing.
 - **Judge0**: RapidAPI Judge0 (free tier, limited)
 
 **Pros:**
+
 - $0/month cost
 - Easy setup
 - Good for low traffic
 
 **Cons:**
+
 - Judge0 rate limits (50 requests/day)
 - Railway free tier has limits
 
 ### Strategy 2: Scalable Production
 
-For real-world production use.
+For real-world production use with higher traffic.
 
-- **Frontend**: Vercel ($20/month Pro)
-- **Backend**: Railway ($5-20/month depending on usage)
-- **Database**: Supabase ($25/month Pro)
+- **Frontend**: Vercel (free tier or $20/month Pro)
+- **Backend**: Railway (free tier or $5-20/month)
+- **Database**: Supabase (free tier or $25/month Pro)
 - **Judge0**: Self-hosted VPS ($10-20/month)
 
+::: info Free tiers work for production
+All these platforms offer free tiers that can handle production workloads for small to medium traffic. Paid tiers are only necessary when you exceed free tier limits or need additional features.
+:::
+
 **Pros:**
-- No rate limits
+
+- No rate limits (with paid tiers)
 - Full control
 - Scales with usage
 
 **Cons:**
+
 - Monthly costs
 - Requires DevOps knowledge for Judge0
 
@@ -125,14 +184,16 @@ For real-world production use.
 Maximum control and privacy.
 
 - **All components**: Single VPS or Kubernetes cluster
-- **Cost**: $40-100/month depending on traffic
+- **Cost**: Varies depending on the server provider you use
 
 **Pros:**
+
 - Full control
 - Data privacy
 - Predictable costs
 
 **Cons:**
+
 - Requires DevOps expertise
 - Manual scaling
 - Maintenance overhead
@@ -142,6 +203,7 @@ Maximum control and privacy.
 Before deploying, ensure you have:
 
 ### Backend
+
 - [ ] All tests passing (`uv run pytest`)
 - [ ] Environment variables documented
 - [ ] Database migrations up to date
@@ -150,6 +212,7 @@ Before deploying, ensure you have:
 - [ ] Secrets stored securely (not in code)
 
 ### Frontend
+
 - [ ] Production build works (`npm run build`)
 - [ ] Environment variables configured
 - [ ] API URLs point to production
@@ -157,12 +220,14 @@ Before deploying, ensure you have:
 - [ ] Analytics configured (optional)
 
 ### Database
+
 - [ ] Supabase project created
 - [ ] Backups enabled
 - [ ] Connection pooling configured
 - [ ] SSL required
 
 ### Judge0
+
 - [ ] VPS provisioned (if self-hosting)
 - [ ] Docker Compose configured
 - [ ] Authentication enabled
@@ -172,6 +237,7 @@ Before deploying, ensure you have:
 ## Security Considerations
 
 ### Backend
+
 - Use HTTPS only
 - Enable CORS only for your frontend domain
 - Store secrets in environment variables
@@ -180,6 +246,7 @@ Before deploying, ensure you have:
 - Validate all user inputs
 
 ### Judge0
+
 - Enable authentication
 - Use private network if possible
 - Set resource limits (CPU, memory, time)
@@ -187,6 +254,7 @@ Before deploying, ensure you have:
 - Use firewall rules
 
 ### Database
+
 - Require SSL connections
 - Use strong passwords
 - Enable Supabase RLS policies
@@ -197,16 +265,19 @@ Before deploying, ensure you have:
 ## Monitoring
 
 ### Application Monitoring
+
 - **Sentry**: Error tracking
 - **LogRocket**: Session replay
 - **Datadog**: Full-stack monitoring
 
 ### Infrastructure Monitoring
+
 - **Uptime checks**: UptimeRobot, Pingdom
 - **Logs**: Papertrail, Logtail
 - **Metrics**: Prometheus, Grafana
 
 ### Judge0 Monitoring
+
 - Docker stats: `docker stats`
 - Resource usage
 - Submission queue length
@@ -215,16 +286,19 @@ Before deploying, ensure you have:
 ## Backup Strategy
 
 ### Database Backups
+
 - **Supabase**: Automatic daily backups (Pro plan)
 - **Manual**: Daily `pg_dump` via cron job
 - Store in S3 or similar
 
 ### Code Backups
+
 - Git repository (GitHub, GitLab)
 - Tag releases
 - Document deployment process
 
 ### Configuration Backups
+
 - Store `.env.example` files
 - Document infrastructure as code
 - Keep deployment scripts in Git
@@ -236,34 +310,21 @@ Before deploying, ensure you have:
 3. **Frontend**: Keep previous build artifacts
 4. **Monitoring**: Set up alerts for errors/downtime
 
-## Cost Estimation
-
-### Monthly Costs (Strategy 2: Scalable Production)
-
-| Component | Service | Cost |
-|-----------|---------|------|
-| Frontend | Vercel Pro | $20 |
-| Backend | Railway | $5-20 |
-| Database | Supabase Pro | $25 |
-| Judge0 VPS | DigitalOcean Droplet | $12 |
-| **Total** | | **$62-77/month** |
-
-### Monthly Costs (Maximum Free Tier)
-
-| Component | Service | Cost |
-|-----------|---------|------|
-| Frontend | Vercel Free | $0 |
-| Backend | Railway Free | $0 |
-| Database | Supabase Free | $0 |
-| Judge0 | RapidAPI Free | $0 |
-| **Total** | | **$0/month** |
-
-*Note: Free tiers have usage limits*
-
 ## Next Steps
 
 Choose your deployment strategy, then proceed with specific guides:
 
-- [Deploy Backend](/guide/deploy-backend)
-- [Deploy Frontend](/guide/deploy-frontend)
-- [Environment Variables](/guide/environment-variables)
+### Self-Hosting
+
+- [Self-Hosting Guide](/guide/self-hosting) - Complete self-hosting options
+- [Deploy to Coolify](/guide/deploy-coolify) - PaaS deployment with Coolify
+- [Distributed Deployment](/guide/deploy-distributed) - Deploy on multiple platforms
+
+### Cloud Platforms
+
+- [Deploy Backend](/guide/deploy-backend) - Railway, Fly.io, Render
+- [Deploy Frontend](/guide/deploy-frontend) - Vercel, Netlify, Cloudflare
+
+### Reference
+
+- [Environment Variables](/guide/environment-variables) - Complete configuration reference

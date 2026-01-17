@@ -1,0 +1,6 @@
+{
+  "enabledMcpjsonServers": [
+    "playwriter"
+  ],
+  "enableAllProjectMcpServers": true
+}

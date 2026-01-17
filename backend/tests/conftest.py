@@ -130,8 +130,8 @@ def test_user_session() -> dict:
     supabase = create_client(settings.supabase_url, settings.supabase_key)
 
     # Login with email/password
-    email = settings.default_user_email
-    password = settings.default_user_password
+    email = settings.auth_user_email
+    password = settings.auth_password
 
     try:
         # Try to sign in first

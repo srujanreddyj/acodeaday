@@ -31,8 +31,11 @@ export default {
           text: 'Deployment',
           items: [
             { text: 'Overview', link: '/guide/deployment-overview' },
-            { text: 'Deploy Backend', link: '/guide/deploy-backend' },
-            { text: 'Deploy Frontend', link: '/guide/deploy-frontend' },
+            { text: 'Self-Hosting', link: '/guide/self-hosting' },
+            { text: 'Deploy to Coolify', link: '/guide/deploy-coolify' },
+            { text: 'Distributed Deployment', link: '/guide/deploy-distributed' },
+            { text: 'Deploy Backend (Cloud)', link: '/guide/deploy-backend' },
+            { text: 'Deploy Frontend (Cloud)', link: '/guide/deploy-frontend' },
             { text: 'Environment Variables', link: '/guide/environment-variables' },
           ]
         },

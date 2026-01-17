@@ -5,6 +5,7 @@ This guide walks you through setting up the FastAPI backend for acodeaday.
 ## Prerequisites
 
 Before starting, ensure you have:
+
 - Python 3.12+ installed
 - `uv` package manager installed
 - Supabase project created (or local Supabase running)
@@ -28,11 +29,13 @@ uv sync
 ```
 
 This will:
+
 - Create a virtual environment (`.venv`)
 - Install all dependencies from `pyproject.toml`
 - Lock dependencies in `uv.lock`
 
 To activate the virtual environment:
+
 ```bash
 source .venv/bin/activate  # macOS/Linux
 .venv\Scripts\activate     # Windows
@@ -60,7 +63,7 @@ SUPABASE_KEY=[YOUR_ANON_KEY]
 JUDGE0_URL=http://localhost:2358
 
 # Authentication (Basic Auth)
-AUTH_USERNAME=admin
+AUTH_USER_EMAIL=admin
 AUTH_PASSWORD=your-secure-password
 
 # Environment
@@ -90,6 +93,7 @@ uv run alembic upgrade head
 ```
 
 You should see output like:
+
 ```
 INFO  [alembic.runtime.migration] Running upgrade -> 001_initial, Initial schema
 INFO  [alembic.runtime.migration] Running upgrade 001_initial -> 002_user_progress, Add user progress
@@ -119,6 +123,7 @@ uv run python scripts/seed_problems.py seed
 ```
 
 This will:
+
 - Read YAML files from `backend/data/problems/`
 - Insert problems, test cases, and language-specific code
 - Skip problems that already exist (safe to run multiple times)
@@ -237,6 +242,7 @@ backend/
 ### "No module named 'app'"
 
 Make sure you're running commands with `uv run`:
+
 ```bash
 uv run uvicorn app.main:app --reload
 ```
