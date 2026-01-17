@@ -19,21 +19,21 @@ async def ensure_default_user_exists(supabase_client):
     """Create default user in Supabase Auth if it doesn't exist."""
     try:
         await supabase_client.auth.sign_in_with_password({
-            "email": settings.default_user_email,
-            "password": settings.default_user_password,
+            "email": settings.auth_user_email,
+            "password": settings.auth_password,
         })
-        logger.info("default_user_exists", email=settings.default_user_email)
+        logger.info("default_user_exists", email=settings.auth_user_email)
     except Exception:
         try:
             await supabase_client.auth.sign_up({
-                "email": settings.default_user_email,
-                "password": settings.default_user_password,
+                "email": settings.auth_user_email,
+                "password": settings.auth_password,
             })
-            logger.info("default_user_created", email=settings.default_user_email)
+            logger.info("default_user_created", email=settings.auth_user_email)
         except Exception as e:
             logger.warning(
                 "default_user_creation_failed",
-                email=settings.default_user_email,
+                email=settings.auth_user_email,
                 error=str(e),
             )
 
@@ -71,12 +71,7 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000",
-        "http://localhost:3001",
-        "http://localhost:5173",
-        "http://localhost:5174",
-    ],
+    allow_origins=[origin.strip() for origin in settings.cors_origins.split(",")],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

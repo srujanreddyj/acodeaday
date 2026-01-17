@@ -27,10 +27,7 @@ cd acodeaday
 ### 2. Configure Environment
 
 ```bash
-# Copy example env files
 cp .env.example .env
-cp backend/.env.example backend/.env
-cp frontend/.env.example frontend/.env
 ```
 
 Edit `.env` with your Supabase credentials:
@@ -48,6 +45,17 @@ OPENAI_API_KEY=sk-...
 # or
 GOOGLE_API_KEY=...
 ```
+
+::: tip Using Local Supabase?
+If you're running Supabase locally (`supabase start`) instead of Supabase Cloud, use `host.docker.internal` instead of `localhost`:
+
+```bash
+DATABASE_URL=postgresql+asyncpg://postgres:postgres@host.docker.internal:54322/postgres
+SUPABASE_URL=http://host.docker.internal:54321
+```
+
+This is because Docker containers can't reach `localhost` on your machine. See [Self-Hosting Guide](/guide/self-hosting#using-local-supabase-with-docker) for details.
+:::
 
 ### 3. Start Everything
 
@@ -70,14 +78,7 @@ docker compose ps
 curl http://localhost:2358/about
 ```
 
-### 4. Run Database Migrations
-
-```bash
-docker compose exec backend uv run alembic upgrade head
-docker compose exec backend uv run python scripts/seed_problems.py seed
-```
-
-### 5. Create Your Account & Start Coding!
+### 4. Create Your Account & Start Coding!
 
 1. Open `http://localhost:3000` in your browser
 2. Click **"Sign Up"** to create an account via Supabase Auth
@@ -85,7 +86,50 @@ docker compose exec backend uv run python scripts/seed_problems.py seed
 4. After confirming, log in with your credentials
 5. You'll see your daily problems - start solving!
 
-## Option 2: Local Development
+## Option 2: Self-Host with Pre-built Images
+
+Deploy on your own server without building from source.
+
+### 1. Download Production Compose File
+
+```bash
+curl -O https://raw.githubusercontent.com/engineeringwithtemi/acodeaday/main/docker-compose.prod.yml
+```
+
+### 2. Configure Environment
+
+Edit `docker-compose.prod.yml` and update the `CHANGE_ME` values:
+
+- `DATABASE_URL` - Your Supabase PostgreSQL connection string
+- `SUPABASE_URL` - Your Supabase project URL
+- `SUPABASE_KEY` - Your Supabase anon key
+- `VITE_API_URL` - Where users access the backend (e.g., `http://localhost:8000`)
+
+### 3. Start All Services
+
+```bash
+docker compose -f docker-compose.prod.yml up -d
+```
+
+The backend automatically runs migrations and seeds the database on startup.
+
+### 4. Access the App
+
+Open `http://localhost:3000` in your browser.
+
+::: tip Pre-built Images
+This uses images from GitHub Container Registry:
+- `ghcr.io/engineeringwithtemi/acodeaday-backend:latest`
+- `ghcr.io/engineeringwithtemi/acodeaday-frontend:latest`
+
+No building required!
+:::
+
+See [Self-Hosting Guide](/guide/self-hosting) for more deployment options.
+
+---
+
+## Option 3: Local Development
 
 For development with hot-reload, run services locally.
 
@@ -109,14 +153,18 @@ Wait 30 seconds, then verify:
 curl http://localhost:2358/about
 ```
 
-### 3. Backend Setup
+### 3. Configure Environment
+
+```bash
+cp .env.example .env
+# Edit .env with your Supabase credentials
+```
+
+### 4. Backend Setup
 
 ```bash
 cd backend
 uv sync
-cp .env.example .env
-# Edit .env with your Supabase credentials
-
 uv run alembic upgrade head
 uv run python scripts/seed_problems.py seed
 uv run uvicorn app.main:app --reload
@@ -124,20 +172,17 @@ uv run uvicorn app.main:app --reload
 
 Backend available at `http://localhost:8000`
 
-### 4. Frontend Setup
+### 5. Frontend Setup
 
 ```bash
 cd frontend
 npm install
-cp .env.example .env
-# Edit .env - set VITE_API_URL=http://localhost:8000
-
 npm run dev
 ```
 
 Frontend available at `http://localhost:5173`
 
-### 5. Create Account & Start Coding!
+### 6. Create Account & Start Coding!
 
 1. Open `http://localhost:5173`
 2. Click **"Sign Up"** and enter your email/password

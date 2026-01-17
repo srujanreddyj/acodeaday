@@ -5,6 +5,7 @@ This guide walks you through setting up the React frontend for acodeaday.
 ## Prerequisites
 
 Before starting, ensure you have:
+
 - Node.js 22+ installed
 - Backend running on `http://localhost:8000`
 - Supabase credentials
@@ -26,6 +27,7 @@ npm install
 ```
 
 This will install:
+
 - React and TanStack Router
 - Monaco Editor for code editing
 - Supabase client for authentication
@@ -52,6 +54,7 @@ VITE_SUPABASE_ANON_KEY=[YOUR_ANON_KEY]
 ```
 
 **Important:**
+
 - `VITE_API_URL` should match where your backend is running
 - Supabase credentials must match the backend configuration
 - All env vars for Vite must start with `VITE_`
@@ -74,7 +77,7 @@ Open `http://localhost:5173` in your browser. You should see the acodeaday login
 
 Use the credentials configured in your backend `.env`:
 
-- **Username**: Value of `AUTH_USERNAME` (default: `admin`)
+- **Username**: Value of `AUTH_USER_EMAIL` (default: `admin`)
 - **Password**: Value of `AUTH_PASSWORD`
 
 ## Build for Production
@@ -153,16 +156,16 @@ Components are in `src/components/ui/`.
 Authentication is handled via Supabase client:
 
 ```typescript
-import { supabase } from '@/lib/supabase'
+import { supabase } from "@/lib/supabase";
 
 // Login
 const { data, error } = await supabase.auth.signInWithPassword({
   email: username,
-  password: password
-})
+  password: password,
+});
 
 // Get current session
-const session = await supabase.auth.getSession()
+const session = await supabase.auth.getSession();
 ```
 
 ## Common Commands
