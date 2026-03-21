@@ -9,6 +9,8 @@ import {
   X,
   Code2,
   BookOpen,
+  Brain,
+  Map,
 } from 'lucide-react'
 import { useAuth } from '@/hooks'
 
@@ -112,6 +114,32 @@ export default function Header() {
           >
             <Award size={20} />
             <span className="font-medium">Mastered Problems</span>
+          </Link>
+
+          <Link
+            to="/roadmap"
+            onClick={() => setIsOpen(false)}
+            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
+            activeProps={{
+              className:
+                'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
+            }}
+          >
+            <Map size={20} />
+            <span className="font-medium">Roadmap</span>
+          </Link>
+
+          <Link
+            to="/flashcards"
+            onClick={() => setIsOpen(false)}
+            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
+            activeProps={{
+              className:
+                'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
+            }}
+          >
+            <Brain size={20} />
+            <span className="font-medium">Daily Flashcards</span>
           </Link>
 
           <a

@@ -1,5 +1,6 @@
 """FastAPI application entry point."""
 
+import asyncio
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
@@ -9,7 +10,10 @@ from supabase import acreate_client
 from app.config.logging import configure_logging, get_logger
 from app.config.settings import settings
 from app.db.connection import engine
-from app.routes import chat, code, execution, problems, progress, submissions
+from app.routes import chat, code, execution, flashcards, problems, progress, roadmaps, submissions
+from app.db.connection import AsyncSessionLocal
+from app.services.roadmaps import RoadmapService
+from app.services.telegram import telegram_scheduler_loop
 
 configure_logging()
 logger = get_logger(__name__)
@@ -69,9 +73,26 @@ async def lifespan(app: FastAPI):
 
     await ensure_default_user_exists(supabase_client, admin_client)
 
+    try:
+        async with AsyncSessionLocal() as session:
+            roadmap_service = RoadmapService(session)
+            await roadmap_service.ensure_seed_data()
+    except Exception as exc:
+        logger.warning("roadmap_seed_skipped", error=str(exc))
+
+    telegram_task = None
+    if settings.telegram_notifications_enabled:
+        telegram_task = asyncio.create_task(telegram_scheduler_loop())
+
     yield
 
     logger.info("application_shutting_down")
+    if telegram_task:
+        telegram_task.cancel()
+        try:
+            await telegram_task
+        except asyncio.CancelledError:
+            pass
     await engine.dispose()
 
 
@@ -98,6 +119,8 @@ app.include_router(progress.router)
 app.include_router(submissions.router)
 app.include_router(code.router)
 app.include_router(chat.router)
+app.include_router(flashcards.router)
+app.include_router(roadmaps.router)
 
 
 @app.get("/")
