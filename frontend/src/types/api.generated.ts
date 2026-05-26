@@ -452,6 +452,162 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/flashcards": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List Flashcards
+         * @description List flashcards with optional due/tag filters.
+         */
+        get: operations["list_flashcards_api_flashcards_get"];
+        put?: never;
+        /**
+         * Create Flashcard
+         * @description Create a new standalone flashcard.
+         */
+        post: operations["create_flashcard_api_flashcards_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/flashcards/today": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List Due Flashcards Today
+         * @description List due flashcards for today (independent of problem solved flow).
+         */
+        get: operations["list_due_flashcards_today_api_flashcards_today_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/flashcards/{card_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /**
+         * Delete Flashcard
+         * @description Soft-delete a flashcard by marking inactive.
+         */
+        delete: operations["delete_flashcard_api_flashcards__card_id__delete"];
+        options?: never;
+        head?: never;
+        /**
+         * Update Flashcard
+         * @description Update flashcard content/tags/status.
+         */
+        patch: operations["update_flashcard_api_flashcards__card_id__patch"];
+        trace?: never;
+    };
+    "/api/flashcards/{card_id}/review": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Mark Flashcard Reviewed
+         * @description Mark flashcard reviewed and optionally set next due date.
+         */
+        post: operations["mark_flashcard_reviewed_api_flashcards__card_id__review_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/roadmaps": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Roadmaps */
+        get: operations["list_roadmaps_api_roadmaps_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/roadmaps/{slug}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Roadmap */
+        get: operations["get_roadmap_api_roadmaps__slug__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/roadmaps/{slug}/nodes/{node_slug}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Roadmap Node */
+        get: operations["get_roadmap_node_api_roadmaps__slug__nodes__node_slug__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/roadmaps/items/{item_id}/completion": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Set Item Completion */
+        put: operations["set_item_completion_api_roadmaps_items__item_id__completion_put"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/": {
         parameters: {
             query?: never;
@@ -630,6 +786,105 @@ export interface components {
          * @enum {string}
          */
         Difficulty: "easy" | "medium" | "hard";
+        /**
+         * FlashcardCreateRequest
+         * @description Create a new flashcard.
+         */
+        FlashcardCreateRequest: {
+            /** Front */
+            front: string;
+            /** Back */
+            back: string;
+            /** Tags */
+            tags?: string[];
+            /** Problem Slug */
+            problem_slug?: string | null;
+            /** Roadmap Node Slugs */
+            roadmap_node_slugs?: string[];
+            /** Source Url */
+            source_url?: string | null;
+            /** Next Review Date */
+            next_review_date?: string | null;
+        };
+        /**
+         * FlashcardListResponse
+         * @description List response for flashcards.
+         */
+        FlashcardListResponse: {
+            /** Cards */
+            cards: components["schemas"]["FlashcardSchema"][];
+            /** Total */
+            total: number;
+        };
+        /**
+         * FlashcardReviewRequest
+         * @description Mark a flashcard as reviewed.
+         */
+        FlashcardReviewRequest: {
+            /** Next Review Date */
+            next_review_date?: string | null;
+        };
+        /**
+         * FlashcardSchema
+         * @description Flashcard response schema.
+         */
+        FlashcardSchema: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Problem Id */
+            problem_id: string | null;
+            /** Problem Slug */
+            problem_slug?: string | null;
+            /** Roadmap Node Slugs */
+            roadmap_node_slugs?: string[];
+            /** Front */
+            front: string;
+            /** Back */
+            back: string;
+            /** Tags */
+            tags?: string[];
+            /** Source Url */
+            source_url: string | null;
+            /** Is Active */
+            is_active: boolean;
+            /** Last Reviewed At */
+            last_reviewed_at: string | null;
+            /** Next Review Date */
+            next_review_date: string | null;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /**
+             * Updated At
+             * Format: date-time
+             */
+            updated_at: string;
+        };
+        /**
+         * FlashcardUpdateRequest
+         * @description Update an existing flashcard.
+         */
+        FlashcardUpdateRequest: {
+            /** Front */
+            front?: string | null;
+            /** Back */
+            back?: string | null;
+            /** Tags */
+            tags?: string[] | null;
+            /** Roadmap Node Slugs */
+            roadmap_node_slugs?: string[] | null;
+            /** Source Url */
+            source_url?: string | null;
+            /** Next Review Date */
+            next_review_date?: string | null;
+            /** Is Active */
+            is_active?: boolean | null;
+        };
         /** HTTPValidationError */
         HTTPValidationError: {
             /** Detail */
@@ -954,6 +1209,197 @@ export interface components {
             success: boolean;
             /** Message */
             message: string;
+        };
+        /** RoadmapEdgeSchema */
+        RoadmapEdgeSchema: {
+            /** Source Node Slug */
+            source_node_slug: string;
+            /** Target Node Slug */
+            target_node_slug: string;
+        };
+        /** RoadmapFlashcardItem */
+        RoadmapFlashcardItem: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Front */
+            front: string;
+            /** Back */
+            back: string;
+            /** Tags */
+            tags?: string[];
+            /** Problem Slug */
+            problem_slug?: string | null;
+            /** Source Url */
+            source_url?: string | null;
+            /** Last Reviewed At */
+            last_reviewed_at?: string | null;
+        };
+        /** RoadmapItemCompletionRequest */
+        RoadmapItemCompletionRequest: {
+            /** Completed */
+            completed: boolean;
+        };
+        /** RoadmapLegendCounts */
+        RoadmapLegendCounts: {
+            /**
+             * Easy
+             * @default 0
+             */
+            easy: number;
+            /**
+             * Med
+             * @default 0
+             */
+            med: number;
+            /**
+             * Hard
+             * @default 0
+             */
+            hard: number;
+        };
+        /** RoadmapListItem */
+        RoadmapListItem: {
+            /** Slug */
+            slug: string;
+            /** Title */
+            title: string;
+            /** Description */
+            description?: string | null;
+        };
+        /** RoadmapListResponse */
+        RoadmapListResponse: {
+            /** Roadmaps */
+            roadmaps: components["schemas"]["RoadmapListItem"][];
+        };
+        /** RoadmapNodeDetailResponse */
+        RoadmapNodeDetailResponse: {
+            /** Roadmap Slug */
+            roadmap_slug: string;
+            /** Node Slug */
+            node_slug: string;
+            /** Title */
+            title: string;
+            /** Description */
+            description?: string | null;
+            /** Difficulty */
+            difficulty: string;
+            /** Completed Count */
+            completed_count: number;
+            /** Total Count */
+            total_count: number;
+            /** Tutorials */
+            tutorials: components["schemas"]["RoadmapTutorialItem"][];
+            /** Template Groups */
+            template_groups: components["schemas"]["RoadmapTemplateGroup"][];
+            /** Practice */
+            practice: components["schemas"]["RoadmapPracticeItem"][];
+            /** Flashcards */
+            flashcards: components["schemas"]["RoadmapFlashcardItem"][];
+        };
+        /** RoadmapNodeSummary */
+        RoadmapNodeSummary: {
+            /** Slug */
+            slug: string;
+            /** Title */
+            title: string;
+            /** Difficulty */
+            difficulty: string;
+            /** X */
+            x: number;
+            /** Y */
+            y: number;
+            /** Width */
+            width: number;
+            /** Height */
+            height: number;
+            /** Completed Count */
+            completed_count: number;
+            /** Total Count */
+            total_count: number;
+        };
+        /** RoadmapOverviewResponse */
+        RoadmapOverviewResponse: {
+            /** Slug */
+            slug: string;
+            /** Title */
+            title: string;
+            /** Description */
+            description?: string | null;
+            /** Total Problem Goal */
+            total_problem_goal: number;
+            /** Completed Problem Count */
+            completed_problem_count: number;
+            /** Total Problem Count */
+            total_problem_count: number;
+            legend_counts: components["schemas"]["RoadmapLegendCounts"];
+            /** Nodes */
+            nodes: components["schemas"]["RoadmapNodeSummary"][];
+            /** Edges */
+            edges: components["schemas"]["RoadmapEdgeSchema"][];
+        };
+        /** RoadmapPracticeItem */
+        RoadmapPracticeItem: {
+            /**
+             * Problem Id
+             * Format: uuid
+             */
+            problem_id: string;
+            /** Slug */
+            slug: string;
+            /** Title */
+            title: string;
+            /** Difficulty */
+            difficulty: string;
+            /** Source Url */
+            source_url?: string | null;
+            /** Completed */
+            completed: boolean;
+            /** Has Personal Solution */
+            has_personal_solution: boolean;
+        };
+        /** RoadmapTemplateGroup */
+        RoadmapTemplateGroup: {
+            /** Key */
+            key: string;
+            /** Title */
+            title: string;
+            /** Items */
+            items: components["schemas"]["RoadmapTemplateItem"][];
+        };
+        /** RoadmapTemplateItem */
+        RoadmapTemplateItem: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Title */
+            title: string;
+            /** Body */
+            body?: string | null;
+            /** Code Language */
+            code_language?: string | null;
+            /** Completed */
+            completed: boolean;
+        };
+        /** RoadmapTutorialItem */
+        RoadmapTutorialItem: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Title */
+            title: string;
+            /** Body */
+            body?: string | null;
+            /** Resource Url */
+            resource_url?: string | null;
+            /** Completed */
+            completed: boolean;
         };
         /**
          * RunCodeRequest
@@ -1975,6 +2421,311 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": components["schemas"]["SendMessageRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_flashcards_api_flashcards_get: {
+        parameters: {
+            query?: {
+                due_only?: boolean;
+                tag?: string | null;
+                include_inactive?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FlashcardListResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    create_flashcard_api_flashcards_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["FlashcardCreateRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FlashcardSchema"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_due_flashcards_today_api_flashcards_today_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FlashcardListResponse"];
+                };
+            };
+        };
+    };
+    delete_flashcard_api_flashcards__card_id__delete: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                card_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    update_flashcard_api_flashcards__card_id__patch: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                card_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["FlashcardUpdateRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FlashcardSchema"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    mark_flashcard_reviewed_api_flashcards__card_id__review_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                card_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["FlashcardReviewRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FlashcardSchema"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_roadmaps_api_roadmaps_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RoadmapListResponse"];
+                };
+            };
+        };
+    };
+    get_roadmap_api_roadmaps__slug__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RoadmapOverviewResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_roadmap_node_api_roadmaps__slug__nodes__node_slug__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                slug: string;
+                node_slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RoadmapNodeDetailResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    set_item_completion_api_roadmaps_items__item_id__completion_put: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                item_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["RoadmapItemCompletionRequest"];
             };
         };
         responses: {

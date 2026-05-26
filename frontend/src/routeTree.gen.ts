@@ -9,12 +9,11 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SignupRouteImport } from './routes/signup'
+import { Route as RoadmapRouteImport } from './routes/roadmap'
 import { Route as ProgressRouteImport } from './routes/progress'
 import { Route as MasteredRouteImport } from './routes/mastered'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as FlashcardsRouteImport } from './routes/flashcards'
-import { Route as RoadmapRouteImport } from './routes/roadmap'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProblemSlugRouteImport } from './routes/problem.$slug'
 import { Route as DemoStartServerFuncsRouteImport } from './routes/demo/start.server-funcs'
@@ -25,9 +24,9 @@ import { Route as DemoStartSsrSpaModeRouteImport } from './routes/demo/start.ssr
 import { Route as DemoStartSsrFullSsrRouteImport } from './routes/demo/start.ssr.full-ssr'
 import { Route as DemoStartSsrDataOnlyRouteImport } from './routes/demo/start.ssr.data-only'
 
-const SignupRoute = SignupRouteImport.update({
-  id: '/signup',
-  path: '/signup',
+const RoadmapRoute = RoadmapRouteImport.update({
+  id: '/roadmap',
+  path: '/roadmap',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProgressRoute = ProgressRouteImport.update({
@@ -48,11 +47,6 @@ const LoginRoute = LoginRouteImport.update({
 const FlashcardsRoute = FlashcardsRouteImport.update({
   id: '/flashcards',
   path: '/flashcards',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RoadmapRoute = RoadmapRouteImport.update({
-  id: '/roadmap',
-  path: '/roadmap',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -104,11 +98,10 @@ const DemoStartSsrDataOnlyRoute = DemoStartSsrDataOnlyRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/flashcards': typeof FlashcardsRoute
-  '/roadmap': typeof RoadmapRoute
   '/login': typeof LoginRoute
   '/mastered': typeof MasteredRoute
   '/progress': typeof ProgressRoute
-  '/signup': typeof SignupRoute
+  '/roadmap': typeof RoadmapRoute
   '/problem/$slug': typeof ProblemSlugRoute
   '/demo/api/names': typeof DemoApiNamesRoute
   '/demo/start/api-request': typeof DemoStartApiRequestRoute
@@ -121,11 +114,10 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/flashcards': typeof FlashcardsRoute
-  '/roadmap': typeof RoadmapRoute
   '/login': typeof LoginRoute
   '/mastered': typeof MasteredRoute
   '/progress': typeof ProgressRoute
-  '/signup': typeof SignupRoute
+  '/roadmap': typeof RoadmapRoute
   '/problem/$slug': typeof ProblemSlugRoute
   '/demo/api/names': typeof DemoApiNamesRoute
   '/demo/start/api-request': typeof DemoStartApiRequestRoute
@@ -139,11 +131,10 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/flashcards': typeof FlashcardsRoute
-  '/roadmap': typeof RoadmapRoute
   '/login': typeof LoginRoute
   '/mastered': typeof MasteredRoute
   '/progress': typeof ProgressRoute
-  '/signup': typeof SignupRoute
+  '/roadmap': typeof RoadmapRoute
   '/problem/$slug': typeof ProblemSlugRoute
   '/demo/api/names': typeof DemoApiNamesRoute
   '/demo/start/api-request': typeof DemoStartApiRequestRoute
@@ -158,11 +149,10 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/flashcards'
-    | '/roadmap'
     | '/login'
     | '/mastered'
     | '/progress'
-    | '/signup'
+    | '/roadmap'
     | '/problem/$slug'
     | '/demo/api/names'
     | '/demo/start/api-request'
@@ -175,11 +165,10 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/flashcards'
-    | '/roadmap'
     | '/login'
     | '/mastered'
     | '/progress'
-    | '/signup'
+    | '/roadmap'
     | '/problem/$slug'
     | '/demo/api/names'
     | '/demo/start/api-request'
@@ -192,11 +181,10 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/flashcards'
-    | '/roadmap'
     | '/login'
     | '/mastered'
     | '/progress'
-    | '/signup'
+    | '/roadmap'
     | '/problem/$slug'
     | '/demo/api/names'
     | '/demo/start/api-request'
@@ -210,11 +198,10 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   FlashcardsRoute: typeof FlashcardsRoute
-  RoadmapRoute: typeof RoadmapRoute
   LoginRoute: typeof LoginRoute
   MasteredRoute: typeof MasteredRoute
   ProgressRoute: typeof ProgressRoute
-  SignupRoute: typeof SignupRoute
+  RoadmapRoute: typeof RoadmapRoute
   ProblemSlugRoute: typeof ProblemSlugRoute
   DemoApiNamesRoute: typeof DemoApiNamesRoute
   DemoStartApiRequestRoute: typeof DemoStartApiRequestRoute
@@ -227,11 +214,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/signup': {
-      id: '/signup'
-      path: '/signup'
-      fullPath: '/signup'
-      preLoaderRoute: typeof SignupRouteImport
+    '/roadmap': {
+      id: '/roadmap'
+      path: '/roadmap'
+      fullPath: '/roadmap'
+      preLoaderRoute: typeof RoadmapRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/progress': {
@@ -260,13 +247,6 @@ declare module '@tanstack/react-router' {
       path: '/flashcards'
       fullPath: '/flashcards'
       preLoaderRoute: typeof FlashcardsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/roadmap': {
-      id: '/roadmap'
-      path: '/roadmap'
-      fullPath: '/roadmap'
-      preLoaderRoute: typeof RoadmapRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -338,11 +318,10 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   FlashcardsRoute: FlashcardsRoute,
-  RoadmapRoute: RoadmapRoute,
   LoginRoute: LoginRoute,
   MasteredRoute: MasteredRoute,
   ProgressRoute: ProgressRoute,
-  SignupRoute: SignupRoute,
+  RoadmapRoute: RoadmapRoute,
   ProblemSlugRoute: ProblemSlugRoute,
   DemoApiNamesRoute: DemoApiNamesRoute,
   DemoStartApiRequestRoute: DemoStartApiRequestRoute,

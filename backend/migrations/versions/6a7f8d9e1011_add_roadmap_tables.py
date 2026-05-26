@@ -9,6 +9,7 @@ from typing import Sequence, Union
 
 from alembic import op
 import sqlalchemy as sa
+from sqlalchemy.dialects import postgresql
 
 
 revision: str = '6a7f8d9e1011'
@@ -17,8 +18,8 @@ branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 
 
-roadmap_node_difficulty = sa.Enum('easy', 'med', 'hard', name='roadmapnodedifficulty')
-roadmap_item_type = sa.Enum('tutorial', 'template', name='roadmapitemtype')
+roadmap_node_difficulty = postgresql.ENUM('easy', 'med', 'hard', name='roadmapnodedifficulty', create_type=False)
+roadmap_item_type = postgresql.ENUM('tutorial', 'template', name='roadmapitemtype', create_type=False)
 
 
 def upgrade() -> None:

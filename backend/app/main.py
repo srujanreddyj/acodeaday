@@ -13,10 +13,14 @@ from app.db.connection import engine
 from app.routes import chat, code, execution, flashcards, problems, progress, roadmaps, submissions
 from app.db.connection import AsyncSessionLocal
 from app.services.roadmaps import RoadmapService
-from app.services.telegram import telegram_scheduler_loop
 
 configure_logging()
 logger = get_logger(__name__)
+
+try:
+    from app.services.telegram import telegram_scheduler_loop
+except ModuleNotFoundError:
+    telegram_scheduler_loop = None
 
 
 async def ensure_default_user_exists(supabase_client, admin_client=None):
@@ -81,7 +85,8 @@ async def lifespan(app: FastAPI):
         logger.warning("roadmap_seed_skipped", error=str(exc))
 
     telegram_task = None
-    if settings.telegram_notifications_enabled:
+    telegram_enabled = getattr(settings, "telegram_notifications_enabled", False)
+    if telegram_enabled and telegram_scheduler_loop is not None:
         telegram_task = asyncio.create_task(telegram_scheduler_loop())
 
     yield

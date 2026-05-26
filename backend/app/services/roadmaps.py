@@ -42,6 +42,7 @@ from app.schemas.roadmaps import (
 )
 
 
+
 SEED_ROADMAP: dict[str, Any] = {
     "slug": "dsa-roadmap",
     "title": "Data Structure & Algorithm",
@@ -52,15 +53,15 @@ SEED_ROADMAP: dict[str, Any] = {
             "slug": "data-structure-and-algorithm",
             "title": "Data Structure & Algorithm",
             "difficulty": "easy",
-            "x": 740,
+            "x": 860,
             "y": 20,
-            "width": 260,
-            "height": 108,
-            "description": "Top-level map for the topics you want to revise.",
+            "width": 280,
+            "height": 110,
+            "description": "Top-level roadmap for the major DSA families and the traversal paths between them.",
             "tutorials": [
                 {
-                    "title": "How to use this roadmap",
-                    "body": "Pick one node at a time. Review the tutorial, scan the templates, solve or revisit a practice problem, then review the flashcards linked to that topic.",
+                    "title": "How to use the roadmap",
+                    "body": "Treat each node as a learning container. Add documentation, problems, and flashcards over time. Progress is driven by the items attached to each node, not by the node itself.",
                 }
             ],
             "templates": [],
@@ -70,15 +71,12 @@ SEED_ROADMAP: dict[str, Any] = {
             "slug": "array",
             "title": "Array",
             "difficulty": "easy",
-            "x": 430,
-            "y": 180,
-            "description": "Array traversal, indexing, and transform patterns.",
-            "tutorials": [
-                {
-                    "title": "Array fundamentals",
-                    "body": "Arrays are about positional access. Most mistakes come from off-by-one handling, mutation during iteration, or missing a prefix/precompute opportunity.",
-                }
-            ],
+            "x": 520,
+            "y": 220,
+            "width": 190,
+            "height": 90,
+            "description": "Core array thinking: indexing, iteration, and transform patterns.",
+            "tutorials": [],
             "templates": [],
             "problem_titles": ["Two Sum", "Best Time to Buy and Sell Stock"],
         },
@@ -86,25 +84,154 @@ SEED_ROADMAP: dict[str, Any] = {
             "slug": "linked-list",
             "title": "Linked List",
             "difficulty": "easy",
-            "x": 1100,
-            "y": 180,
-            "description": "Pointer mutation, traversal invariants, and dummy-node patterns.",
-            "tutorials": [
-                {
-                    "title": "Linked list pointers",
-                    "body": "Track `prev`, `curr`, and `next` explicitly. A dummy head removes many edge cases when the head itself can change.",
-                }
-            ],
+            "x": 1260,
+            "y": 220,
+            "width": 210,
+            "height": 90,
+            "description": "Pointer manipulation, dummy nodes, and slow-fast traversal.",
+            "tutorials": [],
             "templates": [],
             "problem_titles": ["Reverse Linked List", "Merge Two Sorted Lists"],
+        },
+        {
+            "slug": "operations",
+            "title": "Operations",
+            "difficulty": "easy",
+            "x": 350,
+            "y": 430,
+            "width": 250,
+            "height": 380,
+            "description": "Array preprocessing and representation transforms.",
+            "tutorials": [],
+            "templates": [],
+            "problem_titles": [],
+        },
+        {
+            "slug": "prefix-sum",
+            "title": "Prefix Sum",
+            "difficulty": "easy",
+            "x": 390,
+            "y": 480,
+            "width": 170,
+            "height": 84,
+            "description": "Cumulative aggregates for range queries and sum constraints.",
+            "tutorials": [],
+            "templates": [],
+            "problem_titles": ["Subarray Sum Equals K"],
+        },
+        {
+            "slug": "diff-array",
+            "title": "Diff Array",
+            "difficulty": "easy",
+            "x": 390,
+            "y": 580,
+            "width": 170,
+            "height": 84,
+            "description": "Range update encoding using differential representation.",
+            "tutorials": [],
+            "templates": [],
+            "problem_titles": [],
+        },
+        {
+            "slug": "two-d-array",
+            "title": "2D Array",
+            "difficulty": "easy",
+            "x": 390,
+            "y": 680,
+            "width": 170,
+            "height": 84,
+            "description": "Grid indexing, traversal, and matrix transforms.",
+            "tutorials": [],
+            "templates": [],
+            "problem_titles": ["Set Matrix Zeroes"],
+        },
+        {
+            "slug": "basic-data-structure",
+            "title": "Basic Data Structure",
+            "difficulty": "easy",
+            "x": 820,
+            "y": 430,
+            "width": 370,
+            "height": 330,
+            "description": "Foundation buckets for common implementation-level structures.",
+            "tutorials": [],
+            "templates": [],
+            "problem_titles": [],
+        },
+        {
+            "slug": "cycle-array",
+            "title": "Cycle Array",
+            "difficulty": "easy",
+            "x": 860,
+            "y": 530,
+            "width": 170,
+            "height": 84,
+            "description": "Circular indexing and wrap-around state handling.",
+            "tutorials": [],
+            "templates": [],
+            "problem_titles": [],
+        },
+        {
+            "slug": "stack-and-queue",
+            "title": "Stack & Queue",
+            "difficulty": "med",
+            "x": 1050,
+            "y": 530,
+            "width": 170,
+            "height": 84,
+            "description": "LIFO/FIFO modeling, monotonic stacks, and queue simulation.",
+            "tutorials": [],
+            "templates": [],
+            "problem_titles": ["Valid Parentheses"],
+        },
+        {
+            "slug": "hashing",
+            "title": "Hashing",
+            "difficulty": "med",
+            "x": 860,
+            "y": 650,
+            "width": 170,
+            "height": 84,
+            "description": "Hash maps and sets for lookup, counting, and deduplication.",
+            "tutorials": [],
+            "templates": [],
+            "problem_titles": ["Contains Duplicate"],
+        },
+        {
+            "slug": "design",
+            "title": "Design",
+            "difficulty": "med",
+            "x": 1050,
+            "y": 650,
+            "width": 170,
+            "height": 84,
+            "description": "Object/state design questions with constrained operations.",
+            "tutorials": [],
+            "templates": [],
+            "problem_titles": ["Min Stack"],
+        },
+        {
+            "slug": "array-two-pointer",
+            "title": "Array Two Pointer",
+            "difficulty": "easy",
+            "x": 360,
+            "y": 800,
+            "width": 260,
+            "height": 500,
+            "description": "Sorted/unsorted array scan patterns and moving-window variants.",
+            "tutorials": [],
+            "templates": [],
+            "problem_titles": [],
         },
         {
             "slug": "two-pointer",
             "title": "Two Pointer",
             "difficulty": "easy",
-            "x": 430,
-            "y": 340,
-            "description": "Opposite-end and fast-slow pointer techniques.",
+            "x": 400,
+            "y": 850,
+            "width": 180,
+            "height": 84,
+            "description": "Bidirectional and fast-slow pointer reasoning.",
             "tutorials": [
                 {
                     "title": "Two pointer invariant",
@@ -115,11 +242,182 @@ SEED_ROADMAP: dict[str, Any] = {
             "problem_titles": ["Valid Palindrome", "Container With Most Water"],
         },
         {
+            "slug": "sliding-window",
+            "title": "Sliding Window",
+            "difficulty": "med",
+            "x": 400,
+            "y": 960,
+            "width": 180,
+            "height": 84,
+            "description": "Contiguous window maintenance with expand-shrink logic.",
+            "tutorials": [],
+            "templates": [],
+            "problem_titles": ["Longest Substring Without Repeating Characters"],
+        },
+        {
+            "slug": "binary-search",
+            "title": "Binary Search",
+            "difficulty": "med",
+            "x": 400,
+            "y": 1070,
+            "width": 180,
+            "height": 84,
+            "description": "Search on answer space, boundaries, and monotonic predicates.",
+            "tutorials": [],
+            "templates": [],
+            "problem_titles": ["Binary Search", "Search in Rotated Sorted Array"],
+        },
+        {
+            "slug": "randomize",
+            "title": "Randomize",
+            "difficulty": "med",
+            "x": 400,
+            "y": 1180,
+            "width": 180,
+            "height": 84,
+            "description": "Reservoir sampling and randomized set/data-structure patterns.",
+            "tutorials": [],
+            "templates": [],
+            "problem_titles": [],
+        },
+        {
+            "slug": "advanced-data-structure",
+            "title": "Advanced Data Structure",
+            "difficulty": "med",
+            "x": 790,
+            "y": 760,
+            "width": 360,
+            "height": 330,
+            "description": "Tree-based and graph-based specialized structures.",
+            "tutorials": [],
+            "templates": [],
+            "problem_titles": [],
+        },
+        {
+            "slug": "bst",
+            "title": "BST",
+            "difficulty": "med",
+            "x": 830,
+            "y": 810,
+            "width": 135,
+            "height": 84,
+            "description": "Ordered tree search and in-order reasoning.",
+            "tutorials": [],
+            "templates": [],
+            "problem_titles": ["Validate Binary Search Tree"],
+        },
+        {
+            "slug": "heap",
+            "title": "Heap",
+            "difficulty": "med",
+            "x": 990,
+            "y": 810,
+            "width": 135,
+            "height": 84,
+            "description": "Priority queues for top-k, streaming, and greedy ordering.",
+            "tutorials": [],
+            "templates": [],
+            "problem_titles": ["Kth Largest Element in an Array"],
+        },
+        {
+            "slug": "trie",
+            "title": "Trie",
+            "difficulty": "med",
+            "x": 830,
+            "y": 930,
+            "width": 135,
+            "height": 84,
+            "description": "Prefix trees for string/prefix indexing.",
+            "tutorials": [],
+            "templates": [],
+            "problem_titles": ["Implement Trie (Prefix Tree)"],
+        },
+        {
+            "slug": "graph",
+            "title": "Graph",
+            "difficulty": "hard",
+            "x": 990,
+            "y": 930,
+            "width": 135,
+            "height": 84,
+            "description": "General adjacency modeling and traversal/state problems.",
+            "tutorials": [],
+            "templates": [],
+            "problem_titles": ["Clone Graph"],
+        },
+        {
+            "slug": "other",
+            "title": "Other",
+            "difficulty": "med",
+            "x": 740,
+            "y": 1160,
+            "width": 220,
+            "height": 300,
+            "description": "Supporting categories that do not sit on the main traversal branches.",
+            "tutorials": [],
+            "templates": [],
+            "problem_titles": [],
+        },
+        {
+            "slug": "math",
+            "title": "Math",
+            "difficulty": "med",
+            "x": 775,
+            "y": 1215,
+            "width": 150,
+            "height": 84,
+            "description": "Number manipulation, modular arithmetic, and geometry-lite reasoning.",
+            "tutorials": [],
+            "templates": [],
+            "problem_titles": [],
+        },
+        {
+            "slug": "greedy",
+            "title": "Greedy",
+            "difficulty": "med",
+            "x": 775,
+            "y": 1325,
+            "width": 150,
+            "height": 84,
+            "description": "Local-choice optimization with exchange arguments.",
+            "tutorials": [],
+            "templates": [],
+            "problem_titles": ["Jump Game"],
+        },
+        {
+            "slug": "two-pointer-linked-list",
+            "title": "Two Pointer",
+            "difficulty": "easy",
+            "x": 1410,
+            "y": 500,
+            "width": 180,
+            "height": 84,
+            "description": "Slow-fast pointer and pointer-meeting patterns on linked structures.",
+            "tutorials": [],
+            "templates": [],
+            "problem_titles": ["Linked List Cycle"],
+        },
+        {
+            "slug": "recursion",
+            "title": "Recursion",
+            "difficulty": "med",
+            "x": 1410,
+            "y": 650,
+            "width": 180,
+            "height": 84,
+            "description": "Recursive decomposition before tree/general graph specialization.",
+            "tutorials": [],
+            "templates": [],
+            "problem_titles": [],
+        },
+        {
             "slug": "binary-tree",
             "title": "Binary Tree",
             "difficulty": "med",
-            "x": 1100,
-            "y": 500,
+            "x": 1410,
+            "y": 800,
+            "width": 180,
+            "height": 84,
             "description": "Recursive structure, state passing, and traversal selection.",
             "tutorials": [
                 {
@@ -131,57 +429,52 @@ SEED_ROADMAP: dict[str, Any] = {
             "problem_titles": ["Maximum Depth of Binary Tree", "Invert Binary Tree"],
         },
         {
-            "slug": "dfs",
-            "title": "DFS",
-            "difficulty": "hard",
-            "x": 760,
-            "y": 860,
-            "description": "Depth-first traversal on trees, graphs, and implicit state spaces.",
-            "tutorials": [
-                {
-                    "title": "DFS checklist",
-                    "body": "Pick recursion or an explicit stack. Define visited/state transitions first, then define the base case and the work done before or after recursion.",
-                }
-            ],
-            "templates": [
-                {
-                    "group_key": "tree-dfs",
-                    "title": "Tree DFS template",
-                    "body": "```python\ndef dfs(node):\n    if not node:\n        return\n    # pre-order work\n    dfs(node.left)\n    dfs(node.right)\n    # post-order work\n```",
-                    "code_language": "python",
-                }
-            ],
-            "problem_titles": ["Same Tree", "Subtree of Another Tree"],
+            "slug": "recursive-traverse",
+            "title": "Recursive Traverse",
+            "difficulty": "med",
+            "x": 1290,
+            "y": 940,
+            "width": 220,
+            "height": 84,
+            "description": "Pre/in/post-order traversal framing and subtree aggregation.",
+            "tutorials": [],
+            "templates": [],
+            "problem_titles": [],
         },
         {
-            "slug": "bfs",
-            "title": "BFS",
-            "difficulty": "hard",
-            "x": 1390,
-            "y": 860,
-            "description": "Level-order traversal and shortest-path traversal on unweighted graphs.",
-            "tutorials": [
-                {
-                    "title": "BFS checklist",
-                    "body": "BFS is about frontier expansion. Queue initialization and visited timing matter more than the loop body.",
-                }
-            ],
-            "templates": [
-                {
-                    "group_key": "queue-bfs",
-                    "title": "Queue BFS template",
-                    "body": "```python\nfrom collections import deque\n\ndef bfs(start):\n    queue = deque([start])\n    visited = {start}\n    while queue:\n        node = queue.popleft()\n        for neighbor in neighbors(node):\n            if neighbor in visited:\n                continue\n            visited.add(neighbor)\n            queue.append(neighbor)\n```",
-                    "code_language": "python",
-                }
-            ],
+            "slug": "level-traverse",
+            "title": "Level Traverse",
+            "difficulty": "med",
+            "x": 1560,
+            "y": 940,
+            "width": 210,
+            "height": 84,
+            "description": "Breadth-first level processing and queue-based traversal.",
+            "tutorials": [],
+            "templates": [],
             "problem_titles": ["Binary Tree Level Order Traversal"],
+        },
+        {
+            "slug": "traverse-view",
+            "title": "Traverse View",
+            "difficulty": "hard",
+            "x": 1080,
+            "y": 1160,
+            "width": 230,
+            "height": 300,
+            "description": "Traversal patterns where the order of visiting drives the solution.",
+            "tutorials": [],
+            "templates": [],
+            "problem_titles": [],
         },
         {
             "slug": "backtracking",
             "title": "Backtracking",
             "difficulty": "hard",
-            "x": 760,
-            "y": 1030,
+            "x": 1110,
+            "y": 1215,
+            "width": 180,
+            "height": 84,
             "description": "State-space exploration with choose, recurse, unchoose.",
             "tutorials": [
                 {
@@ -193,24 +486,110 @@ SEED_ROADMAP: dict[str, Any] = {
                 {
                     "group_key": "no-dup-no-reuse",
                     "title": "No Duplicate & Not Reusable",
-                    "body": "```python\ndef backtrack(start, path):\n    if done(path):\n        result.append(path[:])\n        return\n\n    for i in range(start, len(nums)):\n        path.append(nums[i])\n        backtrack(i + 1, path)\n        path.pop()\n```",
+                    "body": """```python
+def backtrack(start, path):
+    if done(path):
+        result.append(path[:])
+        return
+
+    for i in range(start, len(nums)):
+        path.append(nums[i])
+        backtrack(i + 1, path)
+        path.pop()
+```""",
                     "code_language": "python",
                 },
                 {
                     "group_key": "dup-no-reuse",
                     "title": "Duplicate & Not Reusable",
-                    "body": "```python\ndef backtrack(start, path):\n    if done(path):\n        result.append(path[:])\n        return\n\n    for i in range(start, len(nums)):\n        if i > start and nums[i] == nums[i - 1]:\n            continue\n        path.append(nums[i])\n        backtrack(i + 1, path)\n        path.pop()\n```",
+                    "body": """```python
+def backtrack(start, path):
+    if done(path):
+        result.append(path[:])
+        return
+
+    for i in range(start, len(nums)):
+        if i > start and nums[i] == nums[i - 1]:
+            continue
+        path.append(nums[i])
+        backtrack(i + 1, path)
+        path.pop()
+```""",
+                    "code_language": "python",
+                },
+                {
+                    "group_key": "no-dup-reusable",
+                    "title": "No Duplicate & Reusable",
+                    "body": """```python
+def backtrack(start, total, path):
+    if total == target:
+        result.append(path[:])
+        return
+    if total > target:
+        return
+
+    for i in range(start, len(nums)):
+        path.append(nums[i])
+        backtrack(i, total + nums[i], path)
+        path.pop()
+```""",
                     "code_language": "python",
                 },
             ],
             "problem_titles": ["Combination Sum", "Subsets"],
         },
         {
+            "slug": "dfs",
+            "title": "DFS",
+            "difficulty": "hard",
+            "x": 1110,
+            "y": 1325,
+            "width": 180,
+            "height": 84,
+            "description": "Depth-first traversal and search over trees, graphs, and implicit state spaces.",
+            "tutorials": [
+                {
+                    "title": "DFS checklist",
+                    "body": "Choose DFS when you need full traversal, connected-component discovery, or recursion-driven state. Mark visited consistently before exploring neighbors.",
+                }
+            ],
+            "templates": [],
+            "problem_titles": ["Number of Islands", "Max Area of Island"],
+        },
+        {
+            "slug": "subproblem-view",
+            "title": "Subproblem View",
+            "difficulty": "hard",
+            "x": 1360,
+            "y": 1160,
+            "width": 230,
+            "height": 300,
+            "description": "Problems decomposed into overlapping or independent subproblems.",
+            "tutorials": [],
+            "templates": [],
+            "problem_titles": [],
+        },
+        {
+            "slug": "divide-and-conquer",
+            "title": "Divide & Conquer",
+            "difficulty": "hard",
+            "x": 1390,
+            "y": 1215,
+            "width": 180,
+            "height": 84,
+            "description": "Split-combine recursive structure where subproblems are mostly independent.",
+            "tutorials": [],
+            "templates": [],
+            "problem_titles": [],
+        },
+        {
             "slug": "dp",
             "title": "DP",
             "difficulty": "hard",
-            "x": 1080,
-            "y": 1030,
+            "x": 1390,
+            "y": 1325,
+            "width": 180,
+            "height": 84,
             "description": "State design, transitions, and memoization/tabulation tradeoffs.",
             "tutorials": [
                 {
@@ -222,31 +601,136 @@ SEED_ROADMAP: dict[str, Any] = {
                 {
                     "group_key": "memo-dp",
                     "title": "Memoization template",
-                    "body": "```python\nfrom functools import cache\n\n@cache\ndef dp(i):\n    if base_case(i):\n        return base_value(i)\n    return transition(dp, i)\n```",
+                    "body": """```python
+from functools import cache
+
+@cache
+def dp(i):
+    if base_case(i):
+        return base_value(i)
+    return transition(dp, i)
+```""",
                     "code_language": "python",
                 }
             ],
             "problem_titles": ["Climbing Stairs", "House Robber"],
         },
+        {
+            "slug": "bfs",
+            "title": "BFS",
+            "difficulty": "hard",
+            "x": 1720,
+            "y": 1160,
+            "width": 170,
+            "height": 84,
+            "description": "Breadth-first traversal and shortest path on unweighted state spaces.",
+            "tutorials": [
+                {
+                    "title": "BFS checklist",
+                    "body": "BFS is about frontier expansion. Queue initialization and visited timing matter more than the loop body.",
+                }
+            ],
+            "templates": [
+                {
+                    "group_key": "queue-bfs",
+                    "title": "Queue BFS template",
+                    "body": """```python
+from collections import deque
+
+def bfs(start):
+    queue = deque([start])
+    visited = {start}
+    while queue:
+        node = queue.popleft()
+        for neighbor in neighbors(node):
+            if neighbor in visited:
+                continue
+            visited.add(neighbor)
+            queue.append(neighbor)
+```""",
+                    "code_language": "python",
+                }
+            ],
+            "problem_titles": [],
+        },
+        {
+            "slug": "shortest-path",
+            "title": "Shortest Path",
+            "difficulty": "hard",
+            "x": 1720,
+            "y": 1325,
+            "width": 190,
+            "height": 84,
+            "description": "Weighted path search and distance relaxation patterns.",
+            "tutorials": [],
+            "templates": [],
+            "problem_titles": [],
+        },
     ],
     "edges": [
         ("data-structure-and-algorithm", "array"),
         ("data-structure-and-algorithm", "linked-list"),
-        ("array", "two-pointer"),
-        ("linked-list", "binary-tree"),
-        ("binary-tree", "dfs"),
-        ("binary-tree", "bfs"),
-        ("dfs", "backtracking"),
-        ("dfs", "dp"),
+        ("array", "operations"),
+        ("operations", "basic-data-structure"),
+        ("operations", "array-two-pointer"),
+        ("linked-list", "basic-data-structure"),
+        ("linked-list", "two-pointer-linked-list"),
+        ("two-pointer-linked-list", "recursion"),
+        ("recursion", "binary-tree"),
+        ("binary-tree", "advanced-data-structure"),
+        ("binary-tree", "recursive-traverse"),
+        ("binary-tree", "level-traverse"),
+        ("recursive-traverse", "traverse-view"),
+        ("recursive-traverse", "subproblem-view"),
+        ("traverse-view", "dfs"),
+        ("level-traverse", "bfs"),
+        ("bfs", "shortest-path"),
+        ("traverse-view", "backtracking"),
+        ("subproblem-view", "divide-and-conquer"),
+        ("subproblem-view", "dp"),
     ],
     "topic_aliases": {
         "arrays": "array",
-        "hash map": "array",
+        "prefix sum": "prefix-sum",
+        "difference array": "diff-array",
+        "2d array": "two-d-array",
+        "matrix": "two-d-array",
+        "cycle array": "cycle-array",
+        "stack": "stack-and-queue",
+        "queue": "stack-and-queue",
+        "stack and queue": "stack-and-queue",
+        "hash map": "hashing",
+        "hashing": "hashing",
+        "design": "design",
+        "bst": "bst",
+        "binary search tree": "bst",
+        "heap": "heap",
+        "priority queue": "heap",
+        "trie": "trie",
+        "graph": "graph",
+        "math": "math",
+        "greedy": "greedy",
+        "two pointer": "two-pointer",
+        "sliding window": "sliding-window",
+        "binary search": "binary-search",
+        "randomize": "randomize",
+        "linked list": "linked-list",
+        "recursion": "recursion",
         "tree": "binary-tree",
         "trees": "binary-tree",
-        "depth first search": "dfs",
-        "breadth first search": "bfs",
+        "recursive traverse": "recursive-traverse",
+        "level traverse": "level-traverse",
+        "traverse view": "traverse-view",
+        "backtracking": "backtracking",
+        "subproblem view": "subproblem-view",
+        "divide and conquer": "divide-and-conquer",
         "dynamic programming": "dp",
+        "dp": "dp",
+        "depth first search": "dfs",
+        "dfs": "dfs",
+        "breadth first search": "bfs",
+        "bfs": "bfs",
+        "shortest path": "shortest-path",
     },
 }
 
@@ -278,8 +762,11 @@ class RoadmapService:
 
     async def ensure_seed_data(self) -> Roadmap:
         roadmap = await self.get_roadmap_by_slug(SEED_ROADMAP["slug"])
-        if roadmap:
+        if roadmap and not await self._seed_requires_refresh(roadmap):
             return roadmap
+        if roadmap:
+            await self.session.delete(roadmap)
+            await self.session.flush()
 
         roadmap = Roadmap(
             slug=SEED_ROADMAP["slug"],
@@ -350,6 +837,34 @@ class RoadmapService:
         await self.session.commit()
         await self.session.refresh(roadmap)
         return roadmap
+
+    async def _seed_requires_refresh(self, roadmap: Roadmap) -> bool:
+        node_result = await self.session.execute(
+            select(RoadmapNode).where(RoadmapNode.roadmap_id == roadmap.id)
+        )
+        existing_nodes = {node.slug: node for node in node_result.scalars().all()}
+        seeded_nodes = {node["slug"]: node for node in SEED_ROADMAP["nodes"]}
+        if set(existing_nodes) != set(seeded_nodes):
+            return True
+
+        for slug, seeded in seeded_nodes.items():
+            existing = existing_nodes[slug]
+            if (
+                existing.title != seeded["title"]
+                or existing.description != seeded.get("description")
+                or existing.difficulty.value != seeded["difficulty"]
+                or existing.x != seeded["x"]
+                or existing.y != seeded["y"]
+                or existing.width != seeded.get("width", 220)
+                or existing.height != seeded.get("height", 96)
+            ):
+                return True
+
+        edge_result = await self.session.execute(
+            select(RoadmapEdge.source_node_id, RoadmapEdge.target_node_id).where(RoadmapEdge.roadmap_id == roadmap.id)
+        )
+        existing_edge_count = len(edge_result.all())
+        return existing_edge_count != len(SEED_ROADMAP["edges"])
 
     async def _link_seed_problems(self, roadmap_id: uuid.UUID) -> None:
         node_result = await self.session.execute(
